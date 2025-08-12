@@ -5,7 +5,6 @@
 # This allows direct communication between a RubyLLM client and an MCP server
 # without external processes or network communication
 
-require "bundler/setup"
 require "ruby_llm/mcp"
 
 # Require the MCP server SDK
@@ -14,6 +13,7 @@ begin
 rescue LoadError
   puts "Error: The 'mcp' gem is required for in-process transport."
   puts "Please install it with: gem install mcp"
+  puts "Add this line to your Gemfile: gem 'mcp'"
   exit 1
 end
 

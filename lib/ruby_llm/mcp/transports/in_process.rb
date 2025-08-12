@@ -110,22 +110,16 @@ module RubyLLM
         private
 
         def setup_server_transport
-          # Import the InProcessTransport from the server side
-          require_relative "../../../../mcp-ruby-sdk/lib/mcp/server/transports/in_process_transport"
+          # Import the InProcessTransport from the MCP server SDK
+          require "mcp/server/transports/in_process_transport"
           
           @server_transport = ::MCP::Server::Transports::InProcessTransport.new(@server, self)
           @server.transport = @server_transport
         rescue LoadError => e
-          # If the MCP SDK is not available in the expected location, try requiring it normally
-          begin
-            require "mcp/server/transports/in_process_transport"
-            @server_transport = ::MCP::Server::Transports::InProcessTransport.new(@server, self)
-            @server.transport = @server_transport
-          rescue LoadError
-            raise Errors::TransportError.new(
-              message: "Could not load MCP server in-process transport. Ensure the mcp gem is available."
-            )
-          end
+          raise Errors::TransportError.new(
+            message: "Could not load MCP server in-process transport. Ensure the 'mcp' gem is installed and available.",
+            error: e
+          )
         end
       end
     end
