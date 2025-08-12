@@ -99,7 +99,7 @@ module RubyLLM
 
       def validate_arguments!(incoming_arguments)
         @arguments.each do |arg|
-          if arg.required && incoming_arguments.key?(arg.name)
+          if arg.required && !incoming_arguments.key?(arg.name)
             raise Errors::PromptArgumentError, "Argument #{arg.name} is required"
           end
         end
