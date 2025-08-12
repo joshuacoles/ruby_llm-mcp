@@ -19,6 +19,7 @@ module RubyLLM
       register_transport(:stdio, RubyLLM::MCP::Transports::Stdio)
       register_transport(:streamable, RubyLLM::MCP::Transports::StreamableHTTP)
       register_transport(:streamable_http, RubyLLM::MCP::Transports::StreamableHTTP)
+      register_transport(:in_process, RubyLLM::MCP::Transports::InProcess)
 
       attr_reader :transport_type, :coordinator, :config, :pid
 

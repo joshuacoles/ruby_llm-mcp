@@ -24,4 +24,6 @@ group :development do
   gem "fast-mcp"
   gem "puma"
   gem "rack"
+
+  gem "mcp", path: "../mcp-ruby-sdk"
 end
